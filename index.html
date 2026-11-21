@@ -3,17 +3,18 @@
 <style>
 :root{font-family:Inter,Arial,sans-serif;color:#1c2938;background:#f2f5f8;font-size:14px}*{box-sizing:border-box}body{margin:0}header{background:#143353;color:white;padding:15px max(16px,calc((100vw - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px}header h1{font-size:20px;margin:0}header small{display:block;color:#cee0f0;margin-top:4px}main{max-width:1200px;margin:20px auto;padding:0 14px 50px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}.tabs button{background:#fff;color:#28435d;border:1px solid #cdd7e2}.tabs button.active{background:#184d79;color:white}button{border:1px solid #1b4d72;background:#1b4d72;color:#fff;padding:9px 13px;border-radius:7px;cursor:pointer;font-weight:600}button.secondary{background:white;color:#184d79;border-color:#b6c8da}button.danger{background:white;color:#b83434;border-color:#b83434}button:disabled{opacity:.45;cursor:not-allowed}.panel{display:none}.panel.active{display:block}.card{background:white;border-radius:12px;border:1px solid #d9e1e9;padding:18px;margin-bottom:14px;box-shadow:0 1px 4px #15335209}h2{font-size:19px;margin:0 0 8px}h3{font-size:15px;margin:0 0 9px}.sub{color:#5f7182;margin:2px 0 14px;line-height:1.5}.controls{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:12px 0}.field{display:flex;flex-direction:column;gap:5px;min-width:130px}.field label{font-weight:600;font-size:12px;color:#456078}.field input,.field select,textarea{border:1px solid #bfcbd6;border-radius:6px;padding:9px 10px;background:white;font:inherit;color:#1c2938}textarea{width:100%;min-height:64px}input[type=file]{max-width:100%;padding:8px}.keygrid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px;margin-top:14px}.keycell{border:1px solid #e0e5ec;border-radius:7px;padding:5px;text-align:center;background:#fafbfd}.keycell label{display:block;color:#5c6e80;font-size:11px;margin-bottom:4px}.keycell select{padding:4px;width:100%;text-align:center}.notice{padding:10px 12px;border-left:3px solid #3c84bd;background:#eef6ff;line-height:1.4}.warn{border-color:#c07b21;background:#fff8e8}.small{font-size:12px;color:#5b6d7d}.sheetwrap{background:#e5ebf1;overflow:auto;padding:16px;border-radius:9px}.paper{width:850px;height:1300px;background:white;box-shadow:0 3px 14px #26354622;margin:auto}.paper svg{display:block;width:100%;height:100%}.scanlayout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:15px}.stage{background:#d9e2eb;border:1px solid #b9cad6;min-height:300px;display:flex;align-items:flex-start;justify-content:center;overflow:auto;border-radius:8px;padding:8px}.stage canvas{max-width:100%;height:auto;cursor:crosshair;touch-action:manipulation;display:block;background:white}.results{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #e2e8ef;padding:8px;text-align:left}th{background:#f4f7fa}td select{padding:5px}.reviewgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;max-height:410px;overflow:auto;margin-top:10px}.reviewitem{border:1px solid #dae3ea;border-radius:7px;padding:5px;text-align:center;font-size:12px}.reviewitem.bad{background:#fff0f0}.reviewitem.ok{background:#ebf8f1}.reviewitem.uncertain{background:#fff6e4}.reviewitem select{width:90%;padding:3px;margin-top:4px}.score{font-size:32px;font-weight:800;color:#184d79}.pill{display:inline-block;background:#e8f3fc;border-radius:18px;padding:4px 9px;font-size:12px;margin-left:7px}.flex{display:flex;align-items:center;gap:9px;flex-wrap:wrap}@media(max-width:850px){.keygrid{grid-template-columns:repeat(6,minmax(0,1fr))}.scanlayout{grid-template-columns:1fr}.reviewgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.paper{transform-origin:top left}header{padding:13px 16px}}@media(max-width:480px){.keygrid{grid-template-columns:repeat(5,minmax(0,1fr))}.reviewgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @page{size:8.5in 13in;margin:0} @media print{body{background:white!important}header,main>*:not(#printPanel),#printPanel>.card:not(.printcard),.noprint{display:none!important}main{padding:0;margin:0;max-width:none}#printPanel{display:block!important}.printcard{padding:0;margin:0;border:0;box-shadow:none}.printcard>h2,.printcard>.sub{display:none}.sheetwrap{background:white;padding:0;border-radius:0;overflow:visible}.paper{width:8.5in;height:13in;box-shadow:none;margin:0}.paper svg{width:8.5in;height:13in}}
-</style></head><body><header><div><h1>AquaGrade <span style="font-weight:400">· Answer Sheet Scanner</span></h1><small>Private, offline-first · 60-item A–D exam</small></div><span style="font-size:12px">Version 2.1 · Built-in key</span></header><main>
+</style></head><body><header><div><h1>AquaGrade <span style="font-weight:400">· Answer Sheet Scanner</span></h1><small>Private, offline-first · 60-item A–D exam</small></div><span style="font-size:12px">Version 2.2 · Auto corner capture</span></header><main>
 <div class="tabs noprint"><button data-tab="keyPanel">1. Answer key</button><button data-tab="printPanel">2. Print sheets</button><button class="active" data-tab="scanPanel">3. Scan & grade</button><button data-tab="recordsPanel">4. Results</button></div>
 <section id="keyPanel" class="panel"><div class="card"><h2>Built-in answer key · Grade 11 Aquaculture Term 2</h2><p class="sub">All 60 answers are already loaded from the teacher’s copy. No setup needed. Four discreetly dot-coded test sheets (one of each per page) currently use the SAME key for testing only; provide different test-version questions/keys before grading actual alternate exams.</p><div class="controls"><div class="field" style="flex:1;min-width:220px"><label>Exam title</label><input id="examTitle" value="GRADE 11 AQUACULTURE – TERM 2 EXAM"></div><div class="field"><label>Number of items</label><input value="60" disabled></div></div><div class="field"><label>Paste an answer key (60 letters A–D separated by spaces, commas, or new lines)</label><textarea id="pasteKey" placeholder="A B C D A ..."></textarea></div><div class="controls"><button id="importKey">Apply pasted key</button><button id="saveKey" class="secondary">Save key</button><button id="clearKey" class="secondary">Clear key</button><button id="keyTemplate" class="secondary">Download blank key CSV</button></div><p id="keyStatus" class="notice">60 of 60 correct answers are already loaded.</p><div class="keygrid" id="keyGrid"></div></div></section>
 <section id="printPanel" class="panel"><div class="card printcard"><h2 class="noprint">Printable answer sheet</h2><p class="sub noprint">Print <b>four answer sheets on one 8.5 × 13 in long bond paper</b> at 100% / Actual Size. Cut along the dashed center lines. The Android scanner reads <b>one cut-out sheet per photo</b>. Use sheets printed from this HTML for scanner compatibility; earlier test PDFs may have different bubble coordinates. Keep all four enlarged black corner squares visible.</p><div class="controls noprint"><button onclick="window.print()">Print answer sheet</button><button id="saveSvg" class="secondary">Save four-sheet SVG</button></div><div class="sheetwrap"><div class="paper" id="paper"></div></div></div></section>
 <section id="scanPanel" class="panel active"><div class="card"><h2>Scan a completed answer sheet</h2><p class="sub">Upload a photograph or take one with your phone. Cut out ONE of the four answer sheets. Photograph that individual sheet, not the whole printed page. Keep its four corner squares visible and use bright, even lighting. The earlier 2/10 detection result shows grading is still unreliable. This adds a live framing guide but is NOT a confirmed detection fix. Keep checking against a manually counted sheet. Select the dot position manually (first, second, third, or fourth); automatic dot-code reading is not yet enabled.</p><div class="controls"><div class="field"><label>Test sheet (temporary testing code)</label><select id="testSet"><option value="A">Dot 1 · A</option><option value="B">Dot 2 · B</option><option value="C">Dot 3 · C</option><option value="D">Dot 4 · D</option></select></div><div class="field"><label>Student name</label><input id="studentName" placeholder="Type student's name"></div><div class="field"><label>Section</label><input id="studentSection" placeholder="e.g., Aquaculture 11"></div><div class="field"><label>Photo of answer sheet</label><input type="file" id="scanImage" accept="image/*" capture="environment"></div></div><div class="card" style="border-color:#c3d6e7;background:#f8fbff">
-<h3>Live camera corner guide (Android Chrome)</h3>
-<p class="small">Fit ONE cut answer sheet inside the white outline, with all four black corner squares near the green targets. Hold the phone parallel to the paper and take the picture. After capture, confirm the exact centers of the four black squares on the photo.</p>
-<div class="controls"><button id="startLiveCamera" type="button">Open live camera guide</button><button id="takeLivePhoto" type="button" disabled>Capture aligned sheet</button><button id="stopLiveCamera" type="button" class="secondary" disabled>Stop camera</button></div>
+<h3>Auto corner capture (Android Chrome)</h3>
+<p class="small">Fit ONE cut answer sheet in the guide. AquaGrade searches for all four printed BLACK corner squares. Each target turns green when found. Keep all four green and steady for about one second for automatic capture. Manual capture remains available.</p>
+<div class="controls"><button id="startLiveCamera" type="button">Open live camera guide</button><button id="takeLivePhoto" type="button" disabled>Capture manually</button><button id="stopLiveCamera" type="button" class="secondary" disabled>Stop camera</button></div>
 <div id="liveGuideWrap" style="display:none;position:relative;width:100%;max-width:440px;margin:8px auto;background:#19212c;overflow:hidden;border-radius:10px;aspect-ratio:425 / 650">
 <video id="liveGuideVideo" autoplay playsinline muted style="width:100%;height:100%;object-fit:cover;display:block"></video>
-<svg viewBox="0 0 425 650" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" aria-label="Answer sheet alignment guide">
+<canvas id="liveAutoOverlay" width="425" height="650" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+<svg viewBox="0 0 425 650" preserveAspectRatio="none" style="display:none;position:absolute;inset:0;width:100%;height:100%;pointer-events:none" aria-label="Answer sheet alignment guide">
 <rect x="27" y="26" width="371" height="598" rx="5" fill="none" stroke="white" stroke-width="2.5" stroke-dasharray="10 6"/>
 <g fill="none" stroke="#41eb91" stroke-width="4">
 <path d="M16 66 V16 H66"/><path d="M359 16 H409 V66"/><path d="M409 584 V634 H359"/><path d="M66 634 H16 V584"/>
@@ -50,9 +51,133 @@ drawScan();
 function useScanImage(im){loadedImage=im;corners=[];currentReads=null;showTargets=false;$('#previewAlignment').disabled=true;$('#grading').style.display='none';drawScan();$('#detect').disabled=true;$('#scanStatus').textContent='Photo ready. Tap the CENTER of each black square: top-left, top-right, bottom-right, bottom-left. Then show bubble alignment.';}
 $('#scanImage').onchange=e=>{let f=e.target.files?.[0];if(!f)return;let url=URL.createObjectURL(f),im=new Image();im.onload=()=>{useScanImage(im);URL.revokeObjectURL(url)};im.onerror=()=>alert('Unable to read this image. Please use a JPEG or PNG.');im.src=url;};
 let liveStream=null;
-async function stopLive(){if(liveStream){liveStream.getTracks().forEach(t=>t.stop());liveStream=null;}$('#liveGuideVideo').srcObject=null;$('#takeLivePhoto').disabled=true;$('#stopLiveCamera').disabled=true;}
-$('#startLiveCamera').onclick=async()=>{try{await stopLive();if(!navigator.mediaDevices?.getUserMedia)throw Error('Live camera unavailable in this browser or file context. Try hosting the HTML on HTTPS or use the photo upload.');liveStream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}}});let v=$('#liveGuideVideo');v.srcObject=liveStream;$('#liveGuideWrap').style.display='block';await v.play();$('#takeLivePhoto').disabled=false;$('#stopLiveCamera').disabled=false;$('#liveCameraStatus').textContent='Live camera active. The guide is for framing only; confirm real black corner centers after capture.';}catch(e){$('#liveCameraStatus').textContent='Camera cannot start: '+e.message+' Use the photo upload instead.';}};
-$('#takeLivePhoto').onclick=()=>{let v=$('#liveGuideVideo');if(!v.videoWidth)return;let cc=document.createElement('canvas');cc.width=v.videoWidth;cc.height=v.videoHeight;cc.getContext('2d').drawImage(v,0,0);let im=new Image();im.onload=()=>{useScanImage(im);$('#scanStatus').textContent='Captured. Now select the four ACTUAL printed black squares in order. The camera guide alone is not exact calibration.';stopLive();};im.src=cc.toDataURL('image/jpeg',.94);};
+// The camera shows the video with CSS object-fit:cover. We analyze that same cropped image.
+const AUTO_W=425,AUTO_H=650;
+const guideCorners=[[31,31],[394,31],[394,619],[31,619]];
+let autoBusy=false,autoConsecutive=0,autoLastCorners=null,autoLastTick=0,autoLoopId=0;
+const autoView=document.createElement('canvas');autoView.width=AUTO_W;autoView.height=AUTO_H;
+const autoCtx=autoView.getContext('2d',{willReadFrequently:true});
+const overlay=$('#liveAutoOverlay'),overlayCtx=overlay.getContext('2d');
+
+function cameraCrop(v){
+ const vw=v.videoWidth,vh=v.videoHeight,k=Math.max(AUTO_W/vw,AUTO_H/vh);
+ return {sx:(vw-AUTO_W/k)/2,sy:(vh-AUTO_H/k)/2,sw:AUTO_W/k,sh:AUTO_H/k,k};
+}
+function drawCameraFrame(v){
+ const o=cameraCrop(v);
+ autoCtx.drawImage(v,o.sx,o.sy,o.sw,o.sh,0,0,AUTO_W,AUTO_H);
+ return o;
+}
+// Find small filled black squares in each guide-corner ROI. Reject thin strokes and large dark regions.
+function findCornerCandidates(data,x0,y0,x1,y1){
+ x0=Math.max(0,x0|0);y0=Math.max(0,y0|0);x1=Math.min(AUTO_W,x1|0);y1=Math.min(AUTO_H,y1|0);
+ let w=x1-x0,h=y1-y0,mask=new Uint8Array(w*h),seen=new Uint8Array(w*h);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   const i=((y+y0)*AUTO_W+x+x0)*4;
+   const l=.299*data[i]+.587*data[i+1]+.114*data[i+2];
+   mask[y*w+x]=(l<105)?1:0;
+ }
+ const results=[],stack=[];
+ for(let j=0;j<h;j++)for(let i=0;i<w;i++){
+  let idx=j*w+i;
+  if(!mask[idx]||seen[idx])continue;
+  stack.length=0;stack.push(idx);seen[idx]=1;
+  let n=0,minx=i,maxx=i,miny=j,maxy=j,sumx=0,sumy=0;
+  while(stack.length){let k=stack.pop(),x=k%w,y=(k/w)|0;
+   n++;sumx+=x;sumy+=y;minx=Math.min(minx,x);maxx=Math.max(maxx,x);miny=Math.min(miny,y);maxy=Math.max(maxy,y);
+   for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){let xx=x+dx,yy=y+dy,q=yy*w+xx;if(xx>=0&&xx<w&&yy>=0&&yy<h&&mask[q]&&!seen[q]){seen[q]=1;stack.push(q)}}
+  }
+  const bw=maxx-minx+1,bh=maxy-miny+1,ratio=bw/bh,fill=n/(bw*bh);
+  if(bw>=7&&bh>=7&&bw<=30&&bh<=30&&ratio>.63&&ratio<1.55&&fill>.55&&n>=42)
+    results.push({x:x0+sumx/n,y:y0+sumy/n,side:(bw+bh)/2,fill});
+ }
+ return results;
+}
+function detectGuidedCorners(){
+ const data=autoCtx.getImageData(0,0,AUTO_W,AUTO_H).data;
+ const found=[];
+ for(let i=0;i<4;i++){
+  const [gx,gy]=guideCorners[i],r=48;
+  let candidates=findCornerCandidates(data,gx-r,gy-r,gx+r,gy+r);
+  candidates.sort((a,b)=>Math.hypot(a.x-gx,a.y-gy)-Math.hypot(b.x-gx,b.y-gy));
+  const p=candidates[0];
+  found.push(p&&Math.hypot(p.x-gx,p.y-gy)<45?[p.x,p.y]:null);
+ }
+ if(found.every(Boolean)){
+  let tl=found[0],tr=found[1],br=found[2],bl=found[3];
+  if(tr[0]-tl[0]<265||br[0]-bl[0]<265||bl[1]-tl[1]<455||br[1]-tr[1]<455)return found.map(()=>null);
+ }
+ return found;
+}
+function drawGuide(points){
+ overlayCtx.clearRect(0,0,AUTO_W,AUTO_H);
+ overlayCtx.lineWidth=2.5;overlayCtx.strokeStyle='rgba(255,255,255,.85)';overlayCtx.setLineDash([10,7]);
+ overlayCtx.strokeRect(25,25,375,600);overlayCtx.setLineDash([]);
+ points.forEach((p,i)=>{
+  let [gx,gy]=guideCorners[i],ok=!!p;
+  overlayCtx.beginPath();overlayCtx.arc(gx,gy,13,0,2*Math.PI);
+  overlayCtx.strokeStyle=ok?'#40ef87':'#ffbd4d';overlayCtx.lineWidth=4;overlayCtx.stroke();
+  if(ok){overlayCtx.beginPath();overlayCtx.arc(p[0],p[1],6,0,Math.PI*2);overlayCtx.fillStyle='#40ef87';overlayCtx.fill();}
+ });
+ overlayCtx.fillStyle='rgba(0,0,0,.65)';overlayCtx.fillRect(62,291,301,55);
+ overlayCtx.textAlign='center';overlayCtx.fillStyle='white';overlayCtx.font='bold 17px Arial';
+ const count=points.filter(Boolean).length;
+ overlayCtx.fillText(count===4?'FOUR CORNERS FOUND':`${count}/4 corners found`,AUTO_W/2,315);
+ overlayCtx.font='13px Arial';overlayCtx.fillText(count===4?`Hold steady · ${Math.min(autoConsecutive,5)}/5`:'Move closer or adjust lighting',AUTO_W/2,335);
+}
+function captureFromVideo(detected=null){
+ const v=$('#liveGuideVideo');if(!v.videoWidth)return;
+ // Capture exact frame at natural camera resolution and convert guide-space positions to photo pixels.
+ const crop=cameraCrop(v);
+ let cc=document.createElement('canvas');cc.width=v.videoWidth;cc.height=v.videoHeight;
+ cc.getContext('2d').drawImage(v,0,0);
+ let im=new Image();im.onload=()=>{
+  useScanImage(im);
+  if(detected){
+   corners=detected.map(([x,y])=>[crop.sx+x/crop.k,crop.sy+y/crop.k]);
+   $('#detect').disabled=false;$('#previewAlignment').disabled=false;
+   showTargets=true;drawScan();
+   $('#scanStatus').textContent='Four corners located automatically. CHECK that the bubble overlay sits inside the circles, then tap Read shaded bubbles. If incorrect, Reset corners and mark them manually.';
+  }else $('#scanStatus').textContent='Captured manually. Please mark the four black squares on the photo.';
+  stopLive();
+ };im.src=cc.toDataURL('image/jpeg',.96);
+}
+function autoCameraLoop(t){
+ if(!liveStream||autoBusy)return;
+ autoLoopId=requestAnimationFrame(autoCameraLoop);
+ if(t-autoLastTick<190)return;autoLastTick=t;
+ let v=$('#liveGuideVideo');if(!v.videoWidth)return;
+ drawCameraFrame(v);
+ let pts=detectGuidedCorners();
+ if(pts.every(Boolean)){
+  const steady=autoLastCorners&&pts.every((p,i)=>Math.hypot(p[0]-autoLastCorners[i][0],p[1]-autoLastCorners[i][1])<7);
+  autoConsecutive=steady?autoConsecutive+1:1;
+  autoLastCorners=pts.map(p=>p.slice());
+ }else{autoConsecutive=0;autoLastCorners=null;}
+ drawGuide(pts);
+ if(autoConsecutive>=5){
+  autoBusy=true;cancelAnimationFrame(autoLoopId);
+  $('#liveCameraStatus').textContent='All four corners found and stable. Captured automatically — please check the bubble overlay before grading.';
+  captureFromVideo(pts);
+ }
+}
+
+async function stopLive(){
+ cancelAnimationFrame(autoLoopId);autoLoopId=0;autoConsecutive=0;autoLastCorners=null;autoBusy=false;
+ if(liveStream){liveStream.getTracks().forEach(t=>t.stop());liveStream=null;}
+ $('#liveGuideVideo').srcObject=null;$('#takeLivePhoto').disabled=true;$('#stopLiveCamera').disabled=true;
+}
+$('#startLiveCamera').onclick=async()=>{try{
+ await stopLive();
+ if(!navigator.mediaDevices?.getUserMedia)throw Error('Live camera requires HTTPS. Open the GitHub Pages address.');
+ liveStream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}}});
+ let v=$('#liveGuideVideo');v.srcObject=liveStream;$('#liveGuideWrap').style.display='block';await v.play();
+ $('#takeLivePhoto').disabled=false;$('#stopLiveCamera').disabled=false;
+ $('#liveCameraStatus').textContent='Align the four printed black squares with the orange corner targets. Green means detected. Auto-capture needs all four stable for about one second.';
+ autoLastTick=0;autoConsecutive=0;autoBusy=false;autoLoopId=requestAnimationFrame(autoCameraLoop);
+ }catch(e){$('#liveCameraStatus').textContent='Camera unavailable: '+e.message+' You can still upload a photo.';}
+};
+$('#takeLivePhoto').onclick=()=>{cancelAnimationFrame(autoLoopId);autoBusy=true;captureFromVideo();};
 $('#stopLiveCamera').onclick=()=>{stopLive();$('#liveCameraStatus').textContent='Camera stopped.';};
 
 scanCanvas.addEventListener('click',e=>{if(!loadedImage||corners.length>=4)return;let r=scanCanvas.getBoundingClientRect(),x=(e.clientX-r.left)*scanCanvas.width/r.width/displayScale,y=(e.clientY-r.top)*scanCanvas.height/r.height/displayScale;corners.push([x,y]);drawScan();let names=['top-left','top-right','bottom-right','bottom-left'];$('#scanStatus').textContent=corners.length===4?'All four corners marked. Click “Read shaded bubbles”.':`Corner ${corners.length} marked. Click ${names[corners.length]} square (corner ${corners.length+1} of 4).`;$('#detect').disabled=corners.length!==4;$('#previewAlignment').disabled=corners.length!==4;});
