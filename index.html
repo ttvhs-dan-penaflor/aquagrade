@@ -7,6 +7,25 @@
 /* AquaGrade compact dashboard */
 header{padding-top:11px;padding-bottom:11px}header h1{font-size:19px}main{margin:12px auto;padding-bottom:28px}.tabs{position:sticky;top:0;z-index:10;background:#f2f5f8;padding:6px 0;margin-bottom:9px}.tabs button{padding:9px 14px}.card{padding:14px;margin-bottom:10px}.sub{margin:3px 0 10px}.controls{gap:9px;margin:9px 0}.notice{padding:8px 10px}.field{gap:3px}h2{font-size:18px}.scanlayout{gap:12px}.stage{min-height:230px}.stage canvas{max-height:65vh;object-fit:contain}.advanced{border:1px solid #d8e1eb;border-radius:8px;padding:9px 10px;margin:9px 0;background:#fbfcfe}.advanced summary{cursor:pointer;font-weight:600;color:#345874}.advanced[open] summary{margin-bottom:9px}.advanced #scanDiagnostic{line-height:1.4}.metrics{display:flex;gap:9px;flex-wrap:wrap;margin-left:auto}.metric{display:flex;flex-direction:column;align-items:center;min-width:76px;padding:8px 10px;border:1px solid #dbe4ed;background:#f7fafc;border-radius:9px}.metric b{font-size:22px;color:#173f61}.metric span{font-size:11px;color:#597185}.score{font-size:29px}.reviewgrid{gap:5px}.reviewitem{padding:4px}@media(max-width:700px){header small{font-size:10px}.tabs button{flex:1;padding:9px 6px;font-size:12px}.card{padding:11px}.metrics{margin-left:0}.metric{flex:1;min-width:66px}.stage canvas{max-height:50vh}}
 .overlay-toggle{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:#204763}.overlay-toggle input{width:17px;height:17px}.stage canvas{max-height:76vh}@media(max-width:700px){.stage canvas{max-height:60vh}}
+
+/* Mobile answer-key editor: readable native controls with enough room for A-D. */
+.keygrid{grid-template-columns:repeat(8,minmax(0,1fr));gap:9px}
+.keycell{min-width:0;padding:8px 6px;background:#fff}
+.keycell label{font-size:13px;font-weight:700;color:#35516a;margin-bottom:7px}
+.keycell select{
+ display:block;box-sizing:border-box;width:100%;min-width:0;min-height:43px;
+ padding:5px 7px;background:#fff;color:#173c58;font:700 18px Arial,sans-serif;
+ text-align:center;text-align-last:center;line-height:1.3;
+ border:1.5px solid #a8bdcd;border-radius:8px;
+}
+.keycell select option{color:#173c58;background:#fff}
+@media(max-width:850px){.keygrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:600px){
+ .keygrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+ .keycell{padding:8px}
+ .keycell select{min-height:48px;font-size:20px;padding:6px 8px}
+}
+@media print{.keygrid{display:none!important}}
 </style></head><body><header><div><h1>AquaGrade <span style="font-weight:400">· Answer Sheet Scanner</span></h1><small>Offline answer sheet grading · Grade 10 &amp; 11</small></div></header><main>
 <div class="tabs noprint"><button data-tab="keyPanel">Answer keys</button><button data-tab="printPanel">Print</button><button class="active" data-tab="scanPanel">Scan & grade</button><button data-tab="recordsPanel">Results</button></div>
 <section id="keyPanel" class="panel"><div class="card"><h2>Answer keys</h2><p class="sub">Grade 11: 8 sets · Grade 10: preloaded. Editing below changes Grade 11 Set 1 only.</p><div class="controls"><div class="field" style="flex:1;min-width:220px"><label>Exam title</label><input id="examTitle" value="GRADE 11 AQUACULTURE – TERM 2 EXAM"></div><div class="field"><label>Number of items</label><input value="60" disabled></div></div><div class="field"><label>Paste 60 answers (A–D)</label><textarea id="pasteKey" placeholder="A B C D A ..."></textarea></div><div class="controls"><button id="importKey">Apply pasted key</button><button id="saveKey" class="secondary">Save key</button><button id="clearKey" class="secondary">Clear key</button><button id="keyTemplate" class="secondary">Download blank key CSV</button></div><p id="keyStatus" class="notice">60 of 60 correct answers are already loaded.</p><div class="keygrid" id="keyGrid"></div></div></section>
@@ -67,7 +86,7 @@ function selectTab(id){document.querySelectorAll('.panel').forEach(p=>p.classLis
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>selectTab(b.dataset.tab)));
 $('#examTitle').value=store.getItem('aquagrade_title')||$('#examTitle').value;
 function buildKey(){let el=$('#keyGrid');el.innerHTML='';for(let i=0;i<N;i++){let d=document.createElement('div');d.className='keycell';d.innerHTML=`<label for="key${i}">${i+1}</label><select id="key${i}" data-i="${i}"><option value="">—</option>${letters.map(x=>`<option value="${x}">${x}</option>`).join('')}</select>`;el.append(d);d.querySelector('select').value=key[i];d.querySelector('select').addEventListener('change',e=>{key[i]=e.target.value;updateKeyStatus();})}updateKeyStatus()}
-function updateKeyStatus(msg){$('#keyStatus').textContent=msg||`Grade 11 Set 1 key ready: ${key.filter(Boolean).length}/60. Grade 10 has a built-in 50-item key; Grade 11 Sets 2–8 have their own keys.`}
+function updateKeyStatus(msg){$('#keyStatus').textContent=msg||`Grade 11 Set 1: ${key.filter(Boolean).length}/60 answers ready.`}
 $('#importKey').onclick=()=>{let a=($('#pasteKey').value.toUpperCase().match(/[ABCD]/g)||[]);if(a.length!==60){alert(`Found ${a.length} letters. Please provide exactly 60 answers (A, B, C, or D).`);return}key=a;buildKey();updateKeyStatus('Imported all 60 answers. Click “Save key” to keep them.');};
 $('#saveKey').onclick=()=>{store.setItem('aquagrade_key',JSON.stringify(key));store.setItem('aquagrade_title',$('#examTitle').value);renderSheet();updateKeyStatus('Saved locally. '+key.filter(Boolean).length+'/60 answers entered.');};
 $('#clearKey').textContent='Restore Set 1 built-in key';$('#clearKey').onclick=()=>{key=BUILTIN_KEYS[1].slice();store.setItem('aquagrade_key',JSON.stringify(key));buildKey();updateKeyStatus('Restored the 60-item Set 1 teacher answer key.');};
